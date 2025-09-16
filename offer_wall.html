@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Offers - Win Prizes!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        :root {
+            --primary-color: #28a745;
+            --secondary-color: #ffc107;
+            --gold-color: #FFD700;
+        }
+        
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(to bottom, #f8f9fa, #ffffff);
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 15px;
+        }
+        
+        .offer-container {
+            width: 100%;
+            max-width: 600px;
+        }
+        
+        .card {
+            border: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .card-header {
+            background-color: var(--gold-color);
+            color: #333;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .card-body {
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .offer-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .offer-steps {
+            text-align: left;
+            margin: 25px 0;
+            padding: 0;
+        }
+        
+        .offer-steps li {
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        
+        .btn {
+            font-size: 1.1rem;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            margin: 8px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            border: none;
+        }
+        
+        .btn-primary:hover {
+            background-color: #218838;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            border: none;
+            color: #000;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #e0a800;
+            color: #000;
+            transform: translateY(-2px);
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 25px;
+            color: #6c757d;
+            font-size: 0.85rem;
+            padding: 0 10px;
+        }
+        
+        /* Mobile responsiveness */
+        @media (max-width: 576px) {
+            body {
+                padding: 10px;
+                align-items: flex-start;
+                padding-top: 20px;
+            }
+            
+            .offer-container {
+                padding: 0;
+            }
+            
+            .card-header {
+                padding: 15px;
+            }
+            
+            .card-header h1 {
+                font-size: 1.5rem !important;
+                margin: 0;
+            }
+            
+            .card-body {
+                padding: 20px 15px;
+            }
+            
+            .offer-icon {
+                font-size: 2.5rem;
+            }
+            
+            .btn {
+                font-size: 1rem;
+                padding: 12px;
+            }
+            
+            .offer-steps {
+                margin: 20px 0;
+            }
+            
+            .offer-steps li {
+                margin-bottom: 12px;
+                font-size: 0.95rem;
+            }
+        }
+        
+        @media (max-width: 380px) {
+            .card-header h1 {
+                font-size: 1.3rem !important;
+            }
+            
+            .btn {
+                font-size: 0.95rem;
+                padding: 10px;
+            }
+            
+            .offer-steps li {
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* Animation for the button */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .btn-pulse {
+            animation: pulse 2s infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="offer-container">
+        <div class="card">
+            <div class="card-header">
+                <h1 class="m-0">💰 Complete Offers for Points! 💰</h1>
+            </div>
+            <div class="card-body">
+                <div class="offer-icon">🎁</div>
+                <h5 class="card-title">Earn Points for Prizes</h5>
+                <p>Each offer earns points for the Sept 21 prize draw. 2-hour cooldown after each completed offer.</p>
+                
+                <ul class="offer-steps">
+                    <li><strong>Step 1:</strong> Click the button below to visit our offer wall</li>
+                    <li><strong>Step 2:</strong> Complete any offer (survey, app install, etc.)</li>
+                    <li><strong>Step 3:</strong> Points will be automatically credited to your account</li>
+                    <li><strong>Step 4:</strong> Check your points on the dashboard</li>
+                </ul>
+                
+                <div class="d-grid gap-2">
+                    <a href="{{ offerwall_url }}" class="btn btn-primary btn-pulse" target="_blank">
+                        Visit Offer Wall & Earn Points!
+                    </a>
+                    <a href="/" class="btn btn-secondary">Back to Dashboard</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <small>Powered by Your Hustle | Questions? DM on TikTok @yourhandle</small>
+        </div>
+    </div>
+
+    <script>
+        // Smooth navigation handling
+        document.addEventListener('DOMContentLoaded', function() {
+            const offerButton = document.querySelector('.btn-primary');
+            
+            offerButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Add a smooth animation
+                this.style.transform = 'scale(0.95)';
+                
+                // Open the offer wall after a brief delay for animation
+                setTimeout(() => {
+                    window.open(this.href, '_blank');
+                    this.style.transform = '';
+                }, 200);
+            });
+        });
+    </script>
+</body>
+</html>

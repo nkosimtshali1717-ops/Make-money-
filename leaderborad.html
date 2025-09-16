@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Leaderboard - Win Prizes!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        :root {
+            --primary-color: #28a745;
+            --secondary-color: #ffc107;
+            --gold-color: #FFD700;
+            --bronze-color: #cd7f32;
+            --silver-color: #c0c0c0;
+        }
+        
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(to bottom, #f8f9fa, #ffffff);
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 15px;
+        }
+        
+        .leaderboard-container {
+            width: 100%;
+            max-width: 700px;
+        }
+        
+        .card {
+            border: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .card-header {
+            background-color: var(--gold-color);
+            color: #333;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .card-body {
+            padding: 25px;
+        }
+        
+        .leaderboard-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .list-group-item {
+            padding: 12px 15px;
+            border-left: none;
+            border-right: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .list-group-item:first-child {
+            border-top: none;
+        }
+        
+        .rank {
+            font-weight: bold;
+            margin-right: 15px;
+            min-width: 30px;
+            text-align: center;
+        }
+        
+        .rank-1 {
+            color: var(--gold-color);
+            font-size: 1.4rem;
+        }
+        
+        .rank-2 {
+            color: var(--silver-color);
+            font-size: 1.3rem;
+        }
+        
+        .rank-3 {
+            color: var(--bronze-color);
+            font-size: 1.2rem;
+        }
+        
+        .user-info {
+            flex-grow: 1;
+        }
+        
+        .user-name {
+            font-weight: 500;
+            margin-bottom: 3px;
+        }
+        
+        .user-stats {
+            font-size: 0.85rem;
+            color: #6c757d;
+        }
+        
+        .points-badge {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-weight: bold;
+            min-width: 70px;
+            text-align: center;
+        }
+        
+        .btn {
+            font-size: 1.1rem;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            border: none;
+        }
+        
+        .btn-primary:hover {
+            background-color: #218838;
+            transform: translateY(-2px);
+        }
+        
+        .no-players {
+            text-align: center;
+            padding: 30px;
+            color: #6c757d;
+            font-size: 1.1rem;
+        }
+        
+        .no-players-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 25px;
+            color: #6c757d;
+            font-size: 0.85rem;
+            padding: 0 10px;
+        }
+        
+        /* Mobile responsiveness */
+        @media (max-width: 576px) {
+            body {
+                padding: 10px;
+                align-items: flex-start;
+                padding-top: 20px;
+            }
+            
+            .leaderboard-container {
+                padding: 0;
+            }
+            
+            .card-header {
+                padding: 15px;
+            }
+            
+            .card-header h1 {
+                font-size: 1.5rem !important;
+                margin: 0;
+            }
+            
+            .card-body {
+                padding: 20px 15px;
+            }
+            
+            .leaderboard-icon {
+                font-size: 2rem;
+            }
+            
+            .list-group-item {
+                padding: 10px 12px;
+                font-size: 0.95rem;
+            }
+            
+            .rank {
+                margin-right: 12px;
+                min-width: 25px;
+            }
+            
+            .rank-1 {
+                font-size: 1.2rem;
+            }
+            
+            .rank-2 {
+                font-size: 1.1rem;
+            }
+            
+            .rank-3 {
+                font-size: 1rem;
+            }
+            
+            .user-stats {
+                font-size: 0.8rem;
+            }
+            
+            .points-badge {
+                font-size: 0.85rem;
+                min-width: 60px;
+                padding: 4px 8px;
+            }
+            
+            .btn {
+                font-size: 1rem;
+                padding: 12px;
+            }
+            
+            .no-players {
+                padding: 20px;
+                font-size: 1rem;
+            }
+            
+            .no-players-icon {
+                font-size: 2.5rem;
+            }
+        }
+        
+        @media (max-width: 380px) {
+            .card-header h1 {
+                font-size: 1.3rem !important;
+            }
+            
+            .list-group-item {
+                flex-wrap: wrap;
+            }
+            
+            .points-badge {
+                margin-top: 5px;
+                width: 100%;
+            }
+            
+            .btn {
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="leaderboard-container">
+        <div class="card">
+            <div class="card-header">
+                <h1 class="m-0">🏆 Top 10 Players 🏆</h1>
+            </div>
+            <div class="card-body">
+                <div class="leaderboard-icon">📊</div>
+                <h5 class="card-title text-center">Win with Points & Referrals (Sept 1–21)</h5>
+                
+                {% if top10 %}
+                    <div class="list-group">
+                        {% for user in top10 %}
+                            <div class="list-group-item">
+                                <span class="rank rank-{{ loop.index }}">{{ loop.index }}</span>
+                                <div class="user-info">
+                                    <div class="user-name">{{ user[0] }}</div>
+                                    <div class="user-stats">{{ user[2] }} referrals</div>
+                                </div>
+                                <span class="points-badge">{{ user[1] }} pts</span>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="no-players">
+                        <div class="no-players-icon">🚀</div>
+                        <p>No players yet! Be the first to earn points and climb the leaderboard.</p>
+                    </div>
+                {% endif %}
+                
+                <a href="/" class="btn btn-primary w-100">Back to Dashboard</a>
+            </div>
+        </div>
+        <div class="footer">
+            <small>Powered by Your Hustle | Questions? DM on TikTok @yourhandle</small>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Leaderboard - Win Prizes!</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap/5.3.0/dist/css/bootstrap.min.css">
+    <!-- Favicon if you have it -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <!-- Custom CSS for better responsiveness and sizing -->
+    <style>
+        body {
+            background: linear-gradient(to bottom, #f8f9fa, #ffffff); /* Subtle gradient for depth */
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .leaderboard-container {
+            width: 100%;
+            max-width: 600px; /* Slightly wider for list */
+            padding: 20px;
+        }
+        .card {
+            border: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Deeper shadow for pop */
+            border-radius: 15px;
+        }
+        .card-header {
+            background-color: #FFD700; /* Gold theme */
+            color: #333;
+            text-align: center;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            padding: 20px;
+        }
+        .card-body {
+            padding: 30px; /* More space for "bigger" feel */
+        }
+        .list-group-item {
+            font-size: 1.1rem; /* Bigger text for readability */
+        }
+        .btn-primary {
+            background-color: #28a745; /* Green accent */
+            border: none;
+            font-size: 1.2rem; /* Larger button text */
+            padding: 12px;
+        }
+        .btn-primary:hover {
+            background-color: #218838;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+        /* Media queries for extra responsiveness */
+        @media (max-width: 576px) {
+            .card-body {
+                padding: 20px; /* Slightly less on tiny screens */
+            }
+            h1.fs-3 {
+                font-size: 1.8rem; /* Adjust header size */
+            }
+            .btn-primary {
+                font-size: 1.1rem;
+            }
+        }
+        @media (min-width: 992px) {
+            .leaderboard-container {
+                max-width: 500px; /* Narrower on desktops for focus */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="leaderboard-container">
+        <div class="card">
+            <div class="card-header">
+                <h1 class="fs-3">🏆 Top 10 Players 🏆</h1>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title text-center">Win with Points & Referrals (Sept 1–21)</h5>
+                <ol class="list-group list-group-numbered">
+                    {% for user in top10 %}
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                {{ user[0] }}
+                            </div>
+                            <span class="badge bg-primary rounded-pill">{{ user[1] }} points ({{ user[2] }} referrals)</span>
+                        </li>
+                    {% endfor %}
+                </ol>
+                <a href="/" class="btn btn-primary w-100 mt-3">Back to Dashboard</a>
+            </div>
+        </div>
+        <div class="footer">
+            <small>Powered by Your Hustle | Questions? DM on TikTok @yourhandle</small>
+        </div>
+    </div>
+</body>
+</html>
